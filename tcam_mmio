@@ -1,0 +1,72 @@
+# TCAM BlackBox Integration Guide
+
+## Overview
+This document describes how to integrate the TCAM (Ternary Content Addressable Memory) IP as a BlackBox in your Chipyard design. The TCAM IP provides a memory-mapped interface that allows the core to communicate with it using standard memory operations.
+
+## TCAM Specifications
+- Size: 64x28 (64 entries, 28-bit wide)
+- Interface: Memory-mapped through TileLink
+- Features:
+  - Priority encoder output (6-bit)
+  - Write mask support (4-bit)
+  - 32-bit data width
+  - 28-bit address width
+
+## Integration Steps
+
+1. **Add TCAM BlackBox Wrapper**
+   - Place the TCAM BlackBox wrapper in `generators/chipyard/src/main/scala/example/TCAMBlackBox.scala`
+   - The wrapper provides a TileLink interface to the TCAM IP
+
+2. **Add Verilog Resources**
+   - Place TCAM Verilog files in `generators/chipyard/src/main/resources/vsrc/tcam/`:
+     - `top_tcam_mem_64x28.sv`
+     - `tcam_7x64.sv`
+     - `priority_encoder_64x6.sv`
+     - `sky130_sram_1kbyte_1rw1r_32x256_8.sv`
+     - `and_gate.sv`
+
+3. **Configuration**
+   Add the following to your config fragment:
+   ```scala
+   class WithTCAM extends Config((site, here, up) => {
+     case BuildRoCC => up(BuildRoCC) ++ Seq(
+       (p: Parameters) => {
+         val tcam = LazyModule(new TCAMBlackBoxWrapper()(p))
+         tcam
+       }
+     )
+   })
+   ```
+
+4. **Memory Map**
+   The TCAM is memory-mapped with the following characteristics:
+   - Base address: Configurable through the config fragment
+   - Address width: 28 bits
+   - Data width: 32 bits
+   - Write mask: 4 bits
+
+## Usage Example
+To use the TCAM in your design:
+
+1. Add the config fragment to your configuration:
+   ```scala
+   class YourConfig extends Config(
+     new WithTCAM ++
+     // ... other config fragments
+   )
+   ```
+
+2. Access the TCAM through memory operations:
+   - Write: Use standard memory write operations to program the TCAM
+   - Read: Use standard memory read operations to query the TCAM
+   - The TCAM will return a 6-bit priority encoder output
+
+## Notes
+- The TCAM implementation uses the Sky130 process node
+- The design includes a priority encoder for multiple matches
+- The TCAM is organized in 4 blocks for efficient access
+- Write operations are controlled through a 4-bit mask for byte-level control
+
+## Required Traits
+The TCAM BlackBox wrapper does not require the `CanHavePeriphery` trait as it is integrated through the RoCC interface. The wrapper uses `LazyModule` and `LazyModuleImp` for proper integration with the Chipyard infrastructure. 
