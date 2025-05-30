@@ -73,3 +73,10 @@ class ManyMMIOAcceleratorRocketConfig extends Config(
   new chipyard.example.WithStreamingFIR ++                  // use top with tilelink-controlled streaming FIR
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
+
+// DOC include start: TCAMRocketConfig
+class TCAMRocketConfig extends Config(
+  new chipyard.example.WithTCAM ++                          // add TCAM peripheral
+  new freechips.rocketchip.rocket.WithNHugeCores(1) ++
+  new chipyard.config.AbstractConfig)
+// DOC include end: TCAMRocketConfig
