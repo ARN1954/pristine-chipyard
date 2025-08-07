@@ -71,3 +71,27 @@ class ZstdCompressorRocketConfig extends Config(
   new compressacc.WithZstdCompressor ++
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
+
+// TCAM RoCC Accelerator configs
+class TCAMRoCCConfig extends Config(
+  new tcam.WithTCAMRoCC64x28 ++                            // add TCAM RoCC accelerator
+  new freechips.rocketchip.subsystem.WithNBigCores(1) ++
+  new chipyard.config.AbstractConfig)
+
+class DualTCAMRoCCConfig extends Config(
+  new tcam.WithTCAMRoCC32x28(OpcodeSet.custom1) ++         // TCAM on custom1
+  new tcam.WithTCAMRoCC64x28(OpcodeSet.custom0) ++         // TCAM on custom0  
+  new freechips.rocketchip.subsystem.WithNBigCores(1) ++
+  new chipyard.config.AbstractConfig)
+
+class TCAMRoCCBoomConfig extends Config(
+  new tcam.WithTCAMRoCC64x28 ++                            // add TCAM RoCC accelerator
+  new boom.common.WithNLargeBooms(1) ++
+  new chipyard.config.AbstractConfig)
+
+// TCAM RoCC with other accelerators
+class TCAMGemminiRoCCConfig extends Config(
+  new tcam.WithTCAMRoCC64x28(OpcodeSet.custom1) ++         // TCAM on custom1
+  new gemmini.DefaultGemminiConfig ++                      // Gemmini on custom0
+  new freechips.rocketchip.subsystem.WithNBigCores(1) ++
+  new chipyard.config.AbstractConfig)
