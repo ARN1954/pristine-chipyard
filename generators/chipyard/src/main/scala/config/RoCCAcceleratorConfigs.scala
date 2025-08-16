@@ -73,8 +73,13 @@ class ZstdCompressorRocketConfig extends Config(
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
 
-class TCAMRoCCConfig extends Config(
-  new tcam.WithTCAMRoCC ++
+class TCAMRoCC64x28Config extends Config(
+  new tcam.WithTCAMRoCC64x28 ++
+  new freechips.rocketchip.rocket.WithNSmallCores(1) ++
+  new chipyard.config.AbstractConfig)
+  
+class TCAMRoCC32x28Config extends Config(
+  new tcam.WithTCAMRoCC32x28 ++
   new freechips.rocketchip.rocket.WithNSmallCores(1) ++
   new chipyard.config.AbstractConfig)
 

@@ -102,4 +102,29 @@ class Tcam64x28AXI4Config extends Config(
   new chipyard.config.WithOffchipBusFrequency(100.0) ++
   new chipyard.config.AbstractConfig)
 
+class Tcam32x28Config extends Config(
+  new chipyard.harness.WithSimAXIMem ++                     
+  new tcam.WithTCAM32x28 ++  // 64x28 configuration
+  new freechips.rocketchip.rocket.WithNSmallCores(1) ++    
+  new chipyard.config.WithPeripheryBusFrequency(100.0) ++
+  new chipyard.config.WithSystemBusFrequency(100.0) ++
+  new chipyard.config.WithFrontBusFrequency(100.0) ++
+  new chipyard.config.WithMemoryBusFrequency(100.0) ++
+  new chipyard.config.WithControlBusFrequency(100.0) ++
+  new chipyard.config.WithOffchipBusFrequency(100.0) ++
+  new chipyard.config.AbstractConfig)
+
+
+class Tcam32x28AXI4Config extends Config(
+  new chipyard.harness.WithSimAXIMem ++                     
+  new tcam.WithTCAM32x28AXI4 ++  // 64x28 AXI4 configuration
+  new freechips.rocketchip.rocket.WithNSmallCores(1) ++    
+  new chipyard.config.WithPeripheryBusFrequency(100.0) ++
+  new chipyard.config.WithSystemBusFrequency(100.0) ++
+  new chipyard.config.WithFrontBusFrequency(100.0) ++
+  new chipyard.config.WithMemoryBusFrequency(100.0) ++
+  new chipyard.config.WithControlBusFrequency(100.0) ++
+  new chipyard.config.WithOffchipBusFrequency(100.0) ++
+  new chipyard.config.AbstractConfig)
+
 
