@@ -13,7 +13,6 @@ static inline unsigned long count_chars(char *start, char needle)
 int main(void)
 {
 	unsigned long count = count_chars(string + 14, 'o');
-	printf("inside charcount");
 	if (count != 3)
 		return count + 1;
 	return 0;

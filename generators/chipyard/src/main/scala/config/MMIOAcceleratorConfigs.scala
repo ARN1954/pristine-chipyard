@@ -77,7 +77,7 @@ class ManyMMIOAcceleratorRocketConfig extends Config(
 // 64x28 TCAM MMIO config
 class Tcam64x28Config extends Config(
   new chipyard.harness.WithSimAXIMem ++                     
-  new tcam.WithTCAM64x28 ++  // 64x28 configuration
+  new tcam.WithTCAM64x28TL ++  // 64x28 configuration
   new freechips.rocketchip.rocket.WithNSmallCores(1) ++    
   new chipyard.config.WithPeripheryBusFrequency(100.0) ++
   new chipyard.config.WithSystemBusFrequency(100.0) ++
@@ -104,7 +104,7 @@ class Tcam64x28AXI4Config extends Config(
 
 class Tcam32x28Config extends Config(
   new chipyard.harness.WithSimAXIMem ++                     
-  new tcam.WithTCAM32x28 ++  // 64x28 configuration
+  new tcam.WithTCAM32x28TL ++  // 64x28 configuration
   new freechips.rocketchip.rocket.WithNSmallCores(1) ++    
   new chipyard.config.WithPeripheryBusFrequency(100.0) ++
   new chipyard.config.WithSystemBusFrequency(100.0) ++
