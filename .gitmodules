@@ -165,4 +165,4 @@
 	url = https://github.com/ucb-bar/radiance.git
 [submodule "generators/tcam"]
 	path = generators/tcam
-	url = https://github.com/ARN1954/TCAM-generator.git
+	url = https://github.com/merledu/TCAM-generator.git
