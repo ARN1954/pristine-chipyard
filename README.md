@@ -7,6 +7,7 @@
 * **Latest Documentation**: https://chipyard.readthedocs.io/
 * **User Question Forum**: https://groups.google.com/forum/#!forum/chipyard
 * **Bugs and Feature Requests**: https://github.com/ucb-bar/chipyard/issues
+* **TCAM Generator README**: generators/tcam/README.md
 
 ## Using Chipyard
 
